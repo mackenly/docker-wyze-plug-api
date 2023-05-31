@@ -41,7 +41,7 @@ else:
         print(f'Got an error: {e}')
 
 
-@app.route('/plug/on', methods=['POST'])
+@app.route('/plug/on', methods=['GET'])
 def plug_on():
     if request.args.get('key') == api_key:
         try:
@@ -60,7 +60,7 @@ def plug_on():
         return jsonify(message="Invalid API key"), 403
 
 
-@app.route('/plug/off', methods=['POST'])
+@app.route('/plug/off', methods=['GET'])
 def plug_off():
     if request.args.get('key') == api_key:
         try:
