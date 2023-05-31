@@ -73,7 +73,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/mackenly/docker-wyze-plug-api:latest
+          tags: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ steps.prep.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha
           
