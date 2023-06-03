@@ -14,7 +14,8 @@ COPY . .
 # Set environment variables for your username, password, and key
 ENV USERNAME=""
 ENV PASSWORD=""
-ENV TOKEN=""
+ENV TOTP=""
+ENV ALWAYS_REFRESH = ""
 ENV KEY=""
 
 EXPOSE 5000

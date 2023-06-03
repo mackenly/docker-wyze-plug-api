@@ -2,14 +2,25 @@
 A docker container containing an API for interacting with Wyze Plugs
 
 ## Overview
-This is a super simple project and I know the documentation needs some work; however, the following gives a brief overview of how to get started, and if something doesn't make sense, the code is very simple.
+The following gives a brief overview of this simple project and shows how to get started, and if something doesn't make sense, the code is very simple.
 
-Big thank you to [Shaun Tarves](https://github.com/shauntarves) and [all the contributors](https://github.com/shauntarves/wyze-sdk/graphs/contributors) to the [wyze-sdk](https://github.com/shauntarves/wyze-sdk) project, which powers the backend of this project. Unfortunately Wyze doesn't have an official API, so this is the best we have for now and some things (like auth) are a challenge to get configured.
+Big thank you to [Shaun Tarves](https://github.com/shauntarves) and [all the contributors](https://github.com/shauntarves/wyze-sdk/graphs/contributors) to the [wyze-sdk](https://github.com/shauntarves/wyze-sdk) project, which powers the backend of this project. Unfortunately Wyze doesn't have an official API, so this is the best we have for now.
+
+An overview of the Docker variables used:
+- USERNAME: Your Wyze username
+- PASSWORD: Your Wyze password
+- TOTP: The totp key given to you by Wyze when you configure an authenticator app (this program acts like an authenticator app, don't worry you can still use your authenticator app)
+- ALWAYS_REFRESH: Always refresh the token each time a request is made? Defaults to True. *(optional)*
+- KEY: A short key used to authenticate incoming requests to provide a small amount of security. Defaults to "mykey". *(optional)*
 
 ### Authentication
-- If you use 2FA, you'll need to get a TOKEN from the Wyze API. The source code includes a start.py script that helps you do this initially by taking your Wyze username and password and prompting you to input your 2FA code. Once you get a TOKEN, you can pass it into your docker image to start the API.
+- If you use 2FA, you'll need to get a TOTP key from the Wyze. Once you get your TOTP key, you can pass it into your docker image to start the API.
 
-- If you don't use 2FA, you can pass your USERNAME and PASSWORD directly into the container.
+```
+💁‍♂️ Not sure what a TOTP key is? It's okay, I was wasn't sure at first either. The TOTP key is the key given to you by Wyze when you configure an authenticator app. If you've already configured 2FA using an authenticator app you may be able to view the code from within the app or (like me) you may have to disable the authenticator app method and reconfigure it. 
+```
+
+- If you don't use 2FA, please configure it and follow the above steps. It's a good idea to use 2FA for any account that supports it so I've made the decision not to support non-2FA accounts for this project.
 
 ### Making Requests
 The API is configured to run on port 5000. You'll also need to pass in a KEY variable or use the default "mykey". This key should be passed with each request to the server within a parameter called "key" as a basic authentication method. I choose to use a parameter rather than a header because my use case only allows me to send GET requests to URLs, not allowing for including headers. Ideally, this should only be run locally, so only your local network traffic would be able to intercept your key. If that's a concern, this project probably isn't a good choice for you, so feel free to fork and modify it to better fit your needs.
