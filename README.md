@@ -1,6 +1,10 @@
 # docker-wyze-plug-api
 A docker container containing an API for interacting with Wyze Plugs
 
+```
+📝 As of July 2023, Wyze now requires an API_KEY and KEY_ID from the Developer API Console (see below) to be passed with all requests. If you were using this tool before then you'll need to update your container. This key/id expires every year so you'll have to manually update it for now.
+```
+
 ## Overview
 The following gives a brief overview of this simple project and shows how to get started, and if something doesn't make sense, the code is very simple.
 
@@ -9,6 +13,8 @@ Big thank you to [Shaun Tarves](https://github.com/shauntarves) and [all the con
 An overview of the Docker variables used:
 - USERNAME: Your Wyze username
 - PASSWORD: Your Wyze password
+- API_KEY: The API key given to you by Wyze from the [Developer API Console](https://developer-api-console.wyze.com/#/apikey/view), it will only show once, so make sure you save it. Note: This is not the same as the KEY which is used to authenticate incoming requests to your API.
+- KEY_ID: The KEY ID given to you by Wyze from the [Developer API Console](https://developer-api-console.wyze.com/#/apikey/view)
 - TOTP: The totp key given to you by Wyze when you configure an authenticator app (this program acts like an authenticator app, don't worry you can still use your authenticator app)
 - ALWAYS_REFRESH: Always refresh the token each time a request is made? Defaults to True. *(optional)*
 - KEY: A short key used to authenticate incoming requests to provide a small amount of security. Defaults to "mykey". *(optional)*

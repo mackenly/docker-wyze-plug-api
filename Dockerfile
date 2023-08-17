@@ -11,9 +11,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application
 COPY . .
 
-# Set environment variables for your username, password, and key
+# Set environment variables for your username, password, api key, key id, and key
 ENV USERNAME=""
 ENV PASSWORD=""
+ENV API_KEY=""
+ENV KEY_ID=""
 ENV TOTP=""
 ENV ALWAYS_REFRESH = ""
 ENV KEY=""
